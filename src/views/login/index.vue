@@ -14,13 +14,13 @@
 
       <el-form-item prop="username">
         <span class="svg-container">
-          <svg-icon icon-class="user" />
+          <svg-icon icon-class="user"/>
         </span>
         <el-input
           ref="username"
           v-model="loginForm.username"
-          placeholder="Username"
-          name="username"
+          placeholder="User Email"
+          name="userEmail"
           type="text"
           tabindex="1"
           auto-complete="on"
@@ -29,7 +29,7 @@
 
       <el-form-item prop="password">
         <span class="svg-container">
-          <svg-icon icon-class="password" />
+          <svg-icon icon-class="password"/>
         </span>
         <el-input
           :key="passwordType"
@@ -54,7 +54,8 @@
         type="primary"
         style="width:100%;margin-bottom:30px;"
         @click.native.prevent="handleLogin"
-        >Login</el-button
+      >Login
+      </el-button
       >
 
       <div class="tips">
@@ -66,21 +67,21 @@
 </template>
 
 <script>
-import { validUsername } from "@/utils/validate";
+import {validEmail} from "@/utils/validate";
 
 export default {
   name: "Login",
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error("Please enter the correct user name"));
+      if (!validEmail(value)) {
+        callback(new Error("Email format error!"));
       } else {
         callback();
       }
     };
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error("The password can not be less than 6 digits"));
+      if (value.length < 8) {
+        callback(new Error("The password can not be less than 8 digits"));
       } else {
         callback();
       }
@@ -88,14 +89,14 @@ export default {
     return {
       loginForm: {
         username: "admin",
-        password: "111111"
+        password: "11111111"
       },
       loginRules: {
         username: [
-          { required: true, trigger: "blur", validator: validateUsername }
+          {required: true, trigger: "blur", validator: validateUsername}
         ],
         password: [
-          { required: true, trigger: "blur", validator: validatePassword }
+          {required: true, trigger: "blur", validator: validatePassword}
         ]
       },
       loading: false,
@@ -105,7 +106,7 @@ export default {
   },
   watch: {
     $route: {
-      handler: function(route) {
+      handler: function (route) {
         this.redirect = route.query && route.query.redirect;
       },
       immediate: true
@@ -129,7 +130,7 @@ export default {
           this.$store
             .dispatch("user/login", this.loginForm)
             .then(() => {
-              this.$router.push({ path: this.redirect || "/" });
+              this.$router.push({path: this.redirect || "/"});
               this.loading = false;
             })
             .catch(() => {
