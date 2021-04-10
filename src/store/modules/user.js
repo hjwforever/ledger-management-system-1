@@ -40,10 +40,11 @@ const actions = {
         .then(response => {
           const { data } = response;
           console.log(response);
-          commit("SET_TOKEN", data.token);
+          // commit("SET_TOKEN", data.token);
           commit("SET_NAME", data.email);
-          console.log(data.email + data.token);
-          setToken(data.token);
+          commit("SET_ROLES", ['admin']);
+          // console.log(data.email + data.token);
+          // setToken(data.token);
           resolve();
         })
         .catch(error => {

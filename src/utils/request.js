@@ -15,12 +15,12 @@ service.interceptors.request.use(
   config => {
     // do something before request is sent
 
-    if (store.getters.token) {
+    // if (store.getters.token) {
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
       // config.headers['X-Token'] = getToken()
-    }
+    // }
     return config;
   },
   error => {
@@ -44,9 +44,9 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data;
-
+    console.log(response);
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 200) {
+    if (res.code !== 200 && res.code !== 0) {
       Message({
         message: res.msg || "Error",
         type: "error",
