@@ -14,7 +14,7 @@
 
       <el-form-item prop="username">
         <span class="svg-container">
-          <svg-icon icon-class="user"/>
+          <svg-icon icon-class="user" />
         </span>
         <el-input
           ref="username"
@@ -29,7 +29,7 @@
 
       <el-form-item prop="password">
         <span class="svg-container">
-          <svg-icon icon-class="password"/>
+          <svg-icon icon-class="password" />
         </span>
         <el-input
           :key="passwordType"
@@ -54,9 +54,8 @@
         type="primary"
         style="width:100%;margin-bottom:30px;"
         @click.native.prevent="handleLogin"
-      >Login
-      </el-button
-      >
+        >Login
+      </el-button>
 
       <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
@@ -67,7 +66,8 @@
 </template>
 
 <script>
-import {validEmail} from "@/utils/validate";
+import { validEmail } from "@/utils/validate";
+// import $ from "../../../public/jquery.min.js";
 
 export default {
   name: "Login",
@@ -80,23 +80,24 @@ export default {
       }
     };
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 8) {
-        callback(new Error("The password can not be less than 8 digits"));
+			// TODO 通知后端设置密码长度限制
+      if (value.length > 16) {
+        callback(new Error("The password can not be more than 16 digits"));
       } else {
         callback();
       }
     };
     return {
       loginForm: {
-        username: "admin",
-        password: "11111111"
+        username: "test@qq.com",
+        password: "123456789"
       },
       loginRules: {
         username: [
-          {required: true, trigger: "blur", validator: validateUsername}
+          { required: true, trigger: "blur", validator: validateUsername }
         ],
         password: [
-          {required: true, trigger: "blur", validator: validatePassword}
+          { required: true, trigger: "blur", validator: validatePassword }
         ]
       },
       loading: false,
@@ -106,7 +107,7 @@ export default {
   },
   watch: {
     $route: {
-      handler: function (route) {
+      handler: function(route) {
         this.redirect = route.query && route.query.redirect;
       },
       immediate: true
@@ -125,12 +126,13 @@ export default {
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
+				// TODO 页面跳转
         if (valid) {
           this.loading = true;
           this.$store
             .dispatch("user/login", this.loginForm)
             .then(() => {
-              this.$router.push({path: this.redirect || "/"});
+              this.$router.push({ path: this.redirect || "/" });
               this.loading = false;
             })
             .catch(() => {
