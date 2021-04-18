@@ -6,6 +6,10 @@ jobs:
   build:
     runs-on: ubuntu-latest      
     steps:
+      - name: Run a multi-line script
+        run: |
+          echo test
+          echo ${{ secrets.DOCKER_REPOSITORY }} ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}123
       - uses: actions/checkout@v2
       - name: Build Image
         run: docker build -t ${{ secrets.DOCKER_REPOSITORY }}:latest ./
