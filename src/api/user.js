@@ -3,7 +3,7 @@ import axios from "axios";
 
 // 登录
 export function login(data) {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     axios(({
       url: process.env.VUE_APP_TEST_LOGIN_URL,
       method: 'post',
@@ -16,6 +16,8 @@ export function login(data) {
           data
         }).then(res => {
           resolve(res)
+        }).catch(err => {
+          reject(err)
         })
       })
       .catch(() => {
