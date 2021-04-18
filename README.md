@@ -14,3 +14,14 @@ npm run dev
 ```
 npm run build
 ```
+
+## Docker
+```
+## pull image
+docker pull aruoxi/lms-frontend
+
+## run a container
+docker run -p 3000:80 \
+-d --name lms-frontend \
+aruoxi/lms-frontend
+```

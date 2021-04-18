@@ -14,3 +14,15 @@ npm run dev
 ```
 npm run build
 ```
+
+
+## Docker
+```
+## 拉取镜像
+docker pull aruoxi/lms-frontend
+
+## 运行至3000端口
+docker run -p 3000:80 \
+-d --name lms-frontend \
+aruoxi/lms-frontend
+```
