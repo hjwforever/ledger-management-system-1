@@ -44,7 +44,7 @@ const actions = {
         setEmail(data.email)
 
         // const { name, avatar } = data
-        const { userName } = data
+        let { userName } = data
         const avatar = "https://z3.ax1x.com/2021/04/11/cwKLLj.png"
         const roles = ['admin']
         // roles must be a non-empty array
